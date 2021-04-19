@@ -22,7 +22,7 @@ namespace DragnDrop
 
     private void InitializeLitBoxItems()
     {
-      this.ListBoxItems.Add("Mortal Combat");
+      this.ListBoxItems.Add("Fruit Ninja");
       this.ListBoxItems.Add("Opera Browser");
       this.ListBoxItems.Add("Notepad");
     }
