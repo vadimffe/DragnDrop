@@ -22,7 +22,7 @@
 
     <TextBlock Grid.Column="0" Grid.Row="0" Text="Category structure" FontSize="18" Margin="0,0,0,10"/>
     <TreeView Grid.Column="0" Grid.Row="1" 
-              ItemsSource="{Binding DirItems}" 
+              ItemsSource="{Binding TreeViewItems}" 
               FontSize="14" 
               AllowDrop="True"
               Drop="TreeView_Drop">

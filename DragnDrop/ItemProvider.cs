@@ -1,45 +1,44 @@
 ﻿using DragnDrop.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DragnDrop
 {
   public class ItemProvider
   {
-    private readonly CategoryItem _rootDirectoryItem;
+    private readonly CategoryItem rootItem;
 
     public ItemProvider()
     {
-      _rootDirectoryItem = new CategoryItem("X") { ItemName = "X" };
+      this.rootItem = new CategoryItem("Categories");
 
-      var childItem1 = new CategoryItem("Productive") { ItemName = "Productive" };
+      var childItem1 = new CategoryItem("Productive");
+      var childItem2 = new CategoryItem("Unproductive");
+      var childItem3 = new CategoryItem("Uncategorized");
+      var childItem4 = new CategoryItem("Unknown");
 
-      var grandChildItem11 = new CategoryItem("Google Chrome") { ItemName = "Google Chrome" };
-      var grandChildItem12 = new CategoryItem("Mozilla Firefox") { ItemName = "Mozilla Firefox" };
+      var grandChildItem1 = new CategoryItem("Mozilla Firefox");
+      var grandChildItem2 = new CategoryItem("Google Chrome");
 
-      childItem1.AddItem(grandChildItem11);
-      childItem1.AddItem(grandChildItem12);
+      var grandChildItem3 = new CategoryItem("Angry Birds");
+      var grandChildItem4 = new CategoryItem("Mortal Combat");
 
-      var childItem2 = new CategoryItem("Unproductive") { ItemName = "Unproductive" };
-      var childItem3 = new CategoryItem("Unknown") { ItemName = "Unknown" };
+      childItem1.AddItem(grandChildItem1);
+      childItem1.AddItem(grandChildItem2);
 
-      var grandChildItem121 = new CategoryItem("Angry Birds") { ItemName = "Angry Birds" };
-      childItem2.AddItem(grandChildItem121);
+      childItem2.AddItem(grandChildItem3);
+      childItem2.AddItem(grandChildItem4);
 
       var childList1 = new ObservableCollection<CategoryItem>
          {
             childItem1,
             childItem2,
-            childItem3
+            childItem3,
+            childItem4
          };
 
-      _rootDirectoryItem.CategoryItems = childList1;
+      this.rootItem.CategoryItems = childList1;
     }
 
-    public ObservableCollection<CategoryItem> DirItems => _rootDirectoryItem.Traverse(_rootDirectoryItem);
+    public ObservableCollection<CategoryItem> TreeVItems => this.rootItem.Traverse(this.rootItem);
   }
 }

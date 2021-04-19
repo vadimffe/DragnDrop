@@ -9,22 +9,31 @@ namespace DragnDrop
     public MainViewModel()
     {
       var itemProvider = new ItemProvider();
-      this.DirItems = new ObservableCollection<CategoryItem>(itemProvider.DirItems);
+      //this.CategoryTreeRoot = new CategoryItem("Categories") { IsExpanded = true };
+      //this.TreeViewItems = new ObservableCollection<CategoryItem>() { this.CategoryTreeRoot };
+      this.TreeViewItems = new ObservableCollection<CategoryItem>(itemProvider.TreeVItems);
 
       this.ListBoxItems = new ObservableCollection<string>();
 
+      this.InitializeLitBoxItems();
+    }
+
+    public CategoryItem CategoryTreeRoot { get; }
+
+    private void InitializeLitBoxItems()
+    {
       this.ListBoxItems.Add("Mortal Combat");
       this.ListBoxItems.Add("Opera Browser");
       this.ListBoxItems.Add("Notepad");
     }
 
-    private ObservableCollection<CategoryItem> dirItems;
-    public ObservableCollection<CategoryItem> DirItems
+    private ObservableCollection<CategoryItem> treeViewItems;
+    public ObservableCollection<CategoryItem> TreeViewItems
     {
-      get => this.dirItems;
+      get => this.treeViewItems;
       set
       {
-        this.dirItems = value;
+        this.treeViewItems = value;
         this.OnPropertyChanged();
       }
     }
