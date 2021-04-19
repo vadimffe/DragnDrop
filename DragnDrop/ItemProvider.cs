@@ -24,7 +24,7 @@ namespace DragnDrop
       childItem1.AddItem(grandChildItem11);
       childItem1.AddItem(grandChildItem12);
 
-      var childItem2 = new CategoryItem("Unproductive") { ItemName = "Google Chrome" };
+      var childItem2 = new CategoryItem("Unproductive") { ItemName = "Unproductive" };
       var childItem3 = new CategoryItem("Unknown") { ItemName = "Unknown" };
 
       var grandChildItem121 = new CategoryItem("Angry Birds") { ItemName = "Angry Birds" };

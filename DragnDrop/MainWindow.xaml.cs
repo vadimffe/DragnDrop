@@ -1,6 +1,7 @@
 ﻿using DragnDrop.Models;
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,10 +23,11 @@ namespace DragnDrop
 
     private void TreeView_Drop(object sender, DragEventArgs e)
     {
-      ListBox parent = (ListBox)sender;
+      TreeView parent = (TreeView)sender;
       object data = e.Data.GetData(typeof(string));
       ((IList)dragSource.ItemsSource).Remove(data);
-      parent.Items.Add(data);
+      //parent.Items.Add(data);
+      Debug.WriteLine(data);
     }
 
     private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

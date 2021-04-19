@@ -32,7 +32,7 @@
         </Style>
       </TreeView.ItemContainerStyle>
       <TreeView.Resources>
-        <HierarchicalDataTemplate DataType="{x:Type model:CategoryItem}" ItemsSource="{Binding Path=Items}">
+        <HierarchicalDataTemplate DataType="{x:Type model:CategoryItem}" ItemsSource="{Binding Path=CategoryItems}">
           <TextBlock Text="{Binding Path=ItemName}" Margin="3,3,3,3"/>
         </HierarchicalDataTemplate>
       </TreeView.Resources>
@@ -51,7 +51,7 @@
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding ItemName}" />
+            <TextBlock Text="{Binding}" />
           </Grid>
         </DataTemplate>
       </ListBox.ItemTemplate>

@@ -11,11 +11,11 @@ namespace DragnDrop
       var itemProvider = new ItemProvider();
       this.DirItems = new ObservableCollection<CategoryItem>(itemProvider.DirItems);
 
-      this.ListBoxItems = new ObservableCollection<CategoryItem>();
+      this.ListBoxItems = new ObservableCollection<string>();
 
-      this.ListBoxItems.Add(new CategoryItem("Mortal Combat") { ItemName = "Mortal Combat" });
-      this.ListBoxItems.Add(new CategoryItem("Opera Browser") { ItemName = "Opera Browser" });
-      this.ListBoxItems.Add(new CategoryItem("Notepad") { ItemName = "Notepad" });
+      this.ListBoxItems.Add("Mortal Combat");
+      this.ListBoxItems.Add("Opera Browser");
+      this.ListBoxItems.Add("Notepad");
     }
 
     private ObservableCollection<CategoryItem> dirItems;
@@ -29,8 +29,8 @@ namespace DragnDrop
       }
     }
 
-    private ObservableCollection<CategoryItem> listBoxItems;
-    public ObservableCollection<CategoryItem> ListBoxItems
+    private ObservableCollection<string> listBoxItems;
+    public ObservableCollection<string> ListBoxItems
     {
       get => this.listBoxItems;
       set
