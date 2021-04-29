@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		    xmlns:self="clr-namespace:DragnDrop"
-        xmlns:model="clr-namespace:DragnDrop.Models"
+        xmlns:model="clr-namespace:DragnDrop.Models" 
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         Title="MainWindow" Height="450" Width="800">
 
   <Window.DataContext>
@@ -21,12 +22,109 @@
     </Grid.ColumnDefinitions>
 
     <TextBlock Grid.Column="0" Grid.Row="0" Text="Category structure" FontSize="18" Margin="0,0,0,10"/>
+    
     <TreeView Grid.Column="0" Grid.Row="1" 
               ItemsSource="{Binding TreeViewItems}" 
               FontSize="14" 
               AllowDrop="True"
               Drop="TreeView_Drop">
+      <!--<i:Interaction.Behaviors>
+          <attachedBehaviors:DragDropBehavior/>
+        </i:Interaction.Behaviors>-->
+      <TreeView.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="Add" Command="{Binding AddNewItemCommand}"/>
+          <MenuItem Header="Edit"/>
+          <MenuItem Header="Remove" Command="{Binding RemoveItemsCommand}"/>
+        </ContextMenu>
+      </TreeView.ContextMenu>
       <TreeView.ItemContainerStyle>
+        <Style TargetType="{x:Type TreeViewItem}">
+          <!--<Setter Property="Focusable" Value="False"/>-->
+          <!--<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />-->
+          <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}" />
+          <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
+          <EventSetter Event="TreeViewItem.PreviewMouseRightButtonDown"
+                     Handler="OnPreviewMouseRightButtonDown"/>
+          <!--<Setter Property="FocusManager.FocusedElement"
+                    Value="{Binding RelativeSource={RelativeSource Self}}" />-->
+        </Style>
+      </TreeView.ItemContainerStyle>
+      <TreeView.ItemTemplate>
+        <HierarchicalDataTemplate DataType="{x:Type model:CategoryItem}" ItemsSource="{Binding Path=CategoryItems}">
+          <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding ItemName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Background="Transparent" IsReadOnly="True" BorderThickness="0">
+              <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                  <Style.Triggers>
+                    <EventTrigger RoutedEvent="LostFocus">
+                      <EventTrigger.Actions>
+                        <BeginStoryboard>
+                          <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Duration="0"
+                                    Storyboard.TargetProperty="(TextBox.IsReadOnly)">
+                              <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                  <sys:Boolean>True</sys:Boolean>
+                                </DiscreteObjectKeyFrame.Value>
+                              </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                          </Storyboard>
+                        </BeginStoryboard>
+                      </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseDoubleClick">
+                      <EventTrigger.Actions>
+                        <BeginStoryboard>
+                          <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Duration="0"
+                                       Storyboard.TargetProperty="(TextBox.IsReadOnly)">
+                              <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                  <sys:Boolean>False</sys:Boolean>
+                                </DiscreteObjectKeyFrame.Value>
+                              </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                          </Storyboard>
+                        </BeginStoryboard>
+                      </EventTrigger.Actions>
+                    </EventTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBox.Style>
+
+              <!--SECOND OPTION | REMOVE SETTERACTION FROM ATTACHED BEHAVIOURS IF BELOW IS NOT NECESSARY-->
+
+              <!--<i:Interaction.Triggers>
+                  <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:EventTrigger.Actions>
+                      <attachedBehaviors:SetterAction>
+                        <attachedBehaviors:SetterAction.Setters>
+                          <Setter Property="TextBox.IsReadOnly" Value="False" />
+                          <Setter Property="TextBox.Background" Value="LightGray" />
+                        </attachedBehaviors:SetterAction.Setters>
+                      </attachedBehaviors:SetterAction>
+                    </i:EventTrigger.Actions>
+                  </i:EventTrigger>
+                  <i:EventTrigger EventName="LostFocus">
+                    <i:EventTrigger.Actions>
+                      <attachedBehaviors:SetterAction>
+                        <attachedBehaviors:SetterAction.Setters>
+                          <Setter Property="TextBox.IsReadOnly" Value="True" />
+                          <Setter Property="TextBox.Background" Value="Transparent" />
+                        </attachedBehaviors:SetterAction.Setters>
+                      </attachedBehaviors:SetterAction>
+                    </i:EventTrigger.Actions>
+                  </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+            </TextBox>
+          </StackPanel>
+        </HierarchicalDataTemplate>
+      </TreeView.ItemTemplate>
+    </TreeView>
+    
+    <!--<TreeView.ItemContainerStyle>
         <Style TargetType="{x:Type TreeViewItem}">
           <Setter Property="IsExpanded" Value="True"/>
         </Style>
@@ -36,7 +134,7 @@
           <TextBlock Text="{Binding Path=ItemName}" Margin="3,3,3,3"/>
         </HierarchicalDataTemplate>
       </TreeView.Resources>
-    </TreeView>
+    </TreeView>-->
 
     <TextBlock Grid.Column="1" Grid.Row="0" Text="Applications" FontSize="18" Margin="0,0,0,10"/>
     <ListBox Grid.Column="1" Grid.Row="1" Name="lbTodoList" 
