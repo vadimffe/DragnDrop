@@ -42,8 +42,8 @@
         <Style TargetType="{x:Type TreeViewItem}">
           <!--<Setter Property="Focusable" Value="False"/>-->
           <!--<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />-->
-          <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}" />
-          <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
+          <Setter Property="IsExpanded" Value="True"/>
+            <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
           <EventSetter Event="TreeViewItem.PreviewMouseRightButtonDown"
                      Handler="OnPreviewMouseRightButtonDown"/>
           <!--<Setter Property="FocusManager.FocusedElement"

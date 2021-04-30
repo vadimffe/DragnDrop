@@ -21,7 +21,7 @@ namespace DragnDrop
       InitializeComponent();
     }
 
-    private ObservableCollection<string> runningApplications;
+    private ObservableCollection<string> listBoxItems;
     private TreeViewItem draggedItem;
     private ListBox? dragSource = null;
     private object mydata;
@@ -67,7 +67,7 @@ namespace DragnDrop
 
         CategoryItem draggedTreeItem = new CategoryItem(string.Empty) { ItemName = this.mydata.ToString() };
         this.AddChild(draggedTreeItem, target);
-        this.runningApplications.Remove(this.mydata.ToString());
+        this.listBoxItems.Remove(this.mydata.ToString());
       }
     }
 
@@ -93,7 +93,7 @@ namespace DragnDrop
     {
       ListBox parent = (ListBox)sender;
       this.dragSource = parent;
-      this.runningApplications = parent.ItemsSource as ObservableCollection<string>;
+      this.listBoxItems = parent.ItemsSource as ObservableCollection<string>;
       this.mydata = GetDataFromListBox(this.dragSource, e.GetPosition(parent));
 
       if (this.mydata != null)
