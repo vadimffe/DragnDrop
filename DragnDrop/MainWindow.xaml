@@ -54,7 +54,7 @@
         <HierarchicalDataTemplate DataType="{x:Type model:CategoryItem}" ItemsSource="{Binding Path=CategoryItems}">
           <StackPanel Orientation="Horizontal">
             <TextBox Text="{Binding ItemName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Background="Transparent" IsReadOnly="True" BorderThickness="0">
+                         Background="Transparent" IsReadOnly="True" BorderThickness="0" PreviewDragOver="TextBox_PreviewDragEnter">
               <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}">
                   <Style.Triggers>

@@ -26,6 +26,11 @@ namespace DragnDrop
     private ListBox? dragSource = null;
     private object mydata;
 
+    private void TextBox_PreviewDragEnter(object sender, DragEventArgs e)
+    {
+      e.Handled = true;
+    }
+
     private void OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
     {
       TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
