@@ -25,6 +25,10 @@ namespace DragnDrop
       this.ListBoxItems.Add("Fruit Ninja");
       this.ListBoxItems.Add("Opera Browser");
       this.ListBoxItems.Add("Notepad");
+      this.ListBoxItems.Add("MS Excel");
+      this.ListBoxItems.Add("MS Word");
+      this.ListBoxItems.Add("MS PowerPoint");
+      this.ListBoxItems.Add("MS Paint");
     }
 
     private ObservableCollection<CategoryItem> treeViewItems;

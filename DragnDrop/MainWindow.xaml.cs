@@ -26,6 +26,22 @@ namespace DragnDrop
     private ListBox? dragSource = null;
     private object mydata;
 
+    private int FindTreeLevel(DependencyObject control)
+    {
+      var level = -1;
+      if (control != null)
+      {
+        var parent = VisualTreeHelper.GetParent(control);
+        while (!(parent is TreeView) && (parent != null))
+        {
+          if (parent is TreeViewItem)
+            level++;
+          parent = VisualTreeHelper.GetParent(parent);
+        }
+      }
+      return level;
+    }
+
     private void TextBox_PreviewDragEnter(object sender, DragEventArgs e)
     {
       e.Handled = true;
@@ -64,11 +80,12 @@ namespace DragnDrop
       e.Handled = true;
       this.draggedItem = new TreeViewItem() { Header = this.mydata };
       TreeViewItem targetItem = this.GetNearestContainer(e.OriginalSource as UIElement);
-      if (targetItem != null && this.draggedItem != null)
+      CategoryItem target = (CategoryItem)targetItem.Header;
+
+      Debug.WriteLine(FindTreeLevel(e.OriginalSource as DependencyObject));
+      if (targetItem != null && this.draggedItem != null && FindTreeLevel(e.OriginalSource as DependencyObject) != 1)
       {
         e.Effects = DragDropEffects.Move;
-
-        CategoryItem target = (CategoryItem)targetItem.Header;
 
         CategoryItem draggedTreeItem = new CategoryItem(string.Empty) { ItemName = this.mydata.ToString() };
         this.AddChild(draggedTreeItem, target);
