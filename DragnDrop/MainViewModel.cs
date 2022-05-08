@@ -9,8 +9,6 @@ namespace DragnDrop
     public MainViewModel()
     {
       var itemProvider = new ItemProvider();
-      //this.CategoryTreeRoot = new CategoryItem("Categories") { IsExpanded = true };
-      //this.TreeViewItems = new ObservableCollection<CategoryItem>() { this.CategoryTreeRoot };
       this.TreeViewItems = new ObservableCollection<CategoryItem>(itemProvider.TreeVItems);
 
       this.ListBoxItems = new ObservableCollection<string>();
